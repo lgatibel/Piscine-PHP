@@ -1,0 +1,63 @@
+<input type="text" id="gauche" />
+<select id="op">
+	<option value="sum">+</option>
+	<option value="sub">-</option>
+	<option value="mult">*</option>
+	<option value="div">/</option>
+	<option value="mod">%</option>
+</select>
+<input type="text" id="droite" />
+<input type="submit" value="Try me !" onclick="calc()">
+<script>
+setTimeout(function(){ alert('Please, use me...'); }, 30000);
+function sum(a, b){return(a + b);}
+function sub(a, b){return(a - b);}
+function mult(a, b){return(a * b);}
+function div(a, b){return(a / b);}
+function mod(a, b){return(a % b);}
+
+function isInt(str){
+	if(str.match("^[0-9]{1,}$"))
+		return (true);
+	return (false);
+}
+function displayRes(res){
+	alert(res);
+	console.log(res);
+}
+function divHandle(a, op, b){
+	if (b > 0){
+		if (op.match("^div$")){
+			displayRes(div(a, b));
+		}
+		else if(op.match("^mod$")){
+			displayRes(mod(a, b));
+		}
+	}
+	else{
+		alert("\"It’s over 9000!\"");
+		console.log("\"It’s over 9000!\"");
+	}
+}
+
+function calc(){
+	var gauche = document.getElementById('gauche').value;
+	var droite = document.getElementById('droite').value;
+	var op = document.getElementById('op').value;
+	if(isInt(gauche) && isInt(droite)){
+		if (op.match("^sum$"))
+			displayRes(sum(parseInt(gauche),parseInt(droite)));
+		else if (op.match("^sub$"))
+			displayRes(sub(parseInt(gauche),parseInt(droite)));
+		else if (op.match("^mult$"))
+			displayRes(mult(parseInt(gauche),parseInt(droite)));
+		 else
+			divHandle(parseInt(gauche), op,parseInt(droite));
+		return;
+	}
+	else{
+		alert('Error :(');
+	}
+	return;
+}
+</script>

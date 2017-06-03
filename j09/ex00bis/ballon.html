@@ -1,0 +1,78 @@
+<!Doctype html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+</head>
+<div id='ballon'>
+</div>
+<style>
+	div{
+		width: 200px;
+		height: 200px;
+		background-color: red;
+		margin: 200px auto auto auto;
+		border-radius: 100px;
+	}
+</style>
+<script>
+$(document).ready(function(){
+
+	$('#ballon').click(grow);
+	$('#ballon').mouseout(reduce);
+
+});
+function changeColor(elem, mod){
+	color = elem.css('backgroundColor');
+	if (mod == 1){
+		if (color == 'rgb(255, 0, 0)'){
+			elem.css('backgroundColor', 'rgb(0, 255, 0)');
+		}
+		else if (color == 'rgb(0, 255, 0)'){
+			elem.css('backgroundColor', 'rgb(0, 0, 255)');
+		}
+		else{
+			elem.css('backgroundColor', 'rgb(255, 0, 0)');
+		}
+	}
+	else{
+		if (color == 'rgb(255, 0, 0)'){
+			elem.css('backgroundColor', 'rgb(0, 0, 255)');
+		}
+		else if (color == 'rgb(0, 255, 0)'){
+			elem.css('backgroundColor', 'rgb(255, 0, 0)');
+		}
+		else{
+			elem.css('backgroundColor', 'rgb(0, 255, 0)');
+		}
+	}
+}
+function grow (){
+	height = $(this).height();
+	color = $(this).css('backgroundColor');
+
+	if (height + 10 <= 420){
+		$(this).height(height + 10);
+		$(this).width(height + 10);
+		$(this).css('border-radius', height +'px');
+	}
+	else{
+		$(this).height(200);
+		$(this).width(200);
+		$(this).css('border-radius', height +'px');
+	}
+	changeColor($(this),1);
+}
+
+function reduce(){
+	height = $(this).height();
+	color = $(this).css('backgroundColor');
+
+	if (height - 5 >= 200){
+		$(this).height(height - 5);
+		$(this).width(height -  5);
+		$(this).css('border-radius', height +'px');
+	}
+	changeColor($(this),0);
+}
+</script>
+</html>

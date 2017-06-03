@@ -1,0 +1,68 @@
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+</head>
+<body>
+<input type="text" id="gauche" value="" />
+<select id="op">
+	<option value="sum">+</option>
+	<option value="sub">-</option>
+	<option value="mult">*</option>
+	<option value="div">/</option>
+	<option value="mod">%</option>
+</select>
+<input type="text" id="droite" value="" />
+<input type="submit" value="Try me !" id="exe">
+<script>
+$(document).ready(function(){
+	setTimeout(function(){ alert('Please, use me...'); }, 30000);
+	$('#exe').click(calc);
+	return;
+});
+function sum(a, b){return(a + b);}
+function sub(a, b){return(a - b);}
+function mult(a, b){return(a * b);}
+function div(a, b){return(a / b);}
+function mod(a, b){return(a % b);}
+
+function displayRes(res){
+	alert(res);
+	console.log(res);
+}
+function divHandle(a, op, b){
+	if (b > 0){
+		if (op.match("^div$")){
+			displayRes(div(a, b));
+		}
+		else if(op.match("^mod$")){
+			displayRes(mod(a, b));
+		}
+	}
+	else{
+		alert("\"It’s over 9000!\"");
+		console.log("\"It’s over 9000!\"");
+	}
+}
+function calc(){
+	var gauche = $('#gauche').val();
+	var droite = $('#droite').val();
+	var op = $('#op').val();
+	if(gauche.match("^[0-9]{1,}$") && droite.match("^[0-9]{1,}$")){
+		if (op.match("^sum$"))
+			displayRes(sum(parseInt(gauche, 10),parseInt(droite, 10)));
+		else if (op.match("^sub$"))
+			displayRes(sub(parseInt(gauche, 10),parseInt(droite, 10)));
+		else if (op.match("^mult$"))
+			displayRes(mult(parseInt(gauche, 10),parseInt(droite, 10)));
+		 else
+			divHandle(parseInt(gauche, 10), op,parseInt(droite, 10));
+		return;
+	}
+	else{
+		alert('Error :(');
+	}
+	return;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<div id='ballon'>
+</div>
+<style>
+	div{
+		width: 200px;
+		height: 200px;
+		background-color: red;
+		margin: 200px auto auto auto;
+		border-radius: 100px;
+	}
+</style>
+<script type/javascript>
+var ballon = document.getElementById('ballon');
+var color = ballon.style.backgroundColor = "red";
+
+ballon.addEventListener("click", grow);
+ballon.addEventListener("mouseout", reduce);
+
+	function grow(){
+		color = ballon.style.backgroundColor;
+		var height = ballon.offsetHeight;
+		var width = ballon.offsetWidth;
+		if (height + 10 <= 420){
+			ballon.style.height = height + 10 + 'px';
+			ballon.style.width = width + 10 + 'px';
+			ballon.style.borderRadius = height / 2 + 5 + 'px';
+		}
+		else{
+			ballon.style.height = 200 + 'px';
+			ballon.style.width = 200 + 'px';
+			ballon.style.borderRadius = 100 + 'px';
+		}
+		if (color == "red"){
+			ballon.style.backgroundColor = 'green';
+		}
+		else if (color == 'green'){
+			ballon.style.backgroundColor = 'blue';
+		}
+		else{
+			ballon.style.backgroundColor = 'red';
+		}
+	}
+	function reduce(){
+		color = ballon.style.backgroundColor;
+		var height = ballon.offsetHeight;
+		var width = ballon.offsetWidth;
+		if (height - 5 >= 200){
+			ballon.style.height = height - 5 + 'px';
+			ballon.style.width = width - 5 + 'px';
+			ballon.style.borderRadius = height + 'px';
+		}
+
+		if (color == 'red'){
+			ballon.style.backgroundColor = 'blue';
+		}
+		else if (color == 'green'){
+			ballon.style.backgroundColor = 'red';
+		}
+		else{
+			ballon.style.backgroundColor = 'green';
+		}
+	}
+</script>
